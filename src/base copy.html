@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Ravish's London Bus Application</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script
+	src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+<script type="text/javascript"
+	src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://jquery-ui-map.googlecode.com/svn/trunk/ui/min/jquery.ui.map.full.min.js"></script>
+<script type="text/javascript">
+	var oldLat = 51.517337;
+	var oldLng = -0.08066;
+	var map;
+	function initializeMap() {
+		var mapOptions = {
+			center : new google.maps.LatLng(oldLat, oldLng),
+			zoom : 16,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById("map-canvas"),
+				mapOptions);
+		$('#map-canvas').height(
+				screen.height - ($('#div-header').height() + 110));
+	}
+	function initializeApplication() {
+		initializeMap();
+		$('#div-stop-list').load('http://localhost:8080/?render=1');
+		$('.ul-stop-list').listview('refresh');
+	}
+</script>
+</head>
+<body>
+	<div data-role="page" id="div-page-main-list">
+		<!-- /panel -->
+		<div data-role="panel" id="mypanel">
+			<a href="#div-page-main-map" data-role="button">Go To Map View</a>
+			<p>Reminders</p>
+			<a href="#mypanel" data-rel="close" data-role="button">Close</a>
+		</div>
+		<!-- /panel -->
+		<!-- /header -->
+		<div data-role="header">
+			<a href="#mypanel" data-icon="arrow-l">Views</a>
+			<h1>Rav's London Bus</h1>
+		</div>
+		<!-- /header -->
+		<!-- /content -->
+		<div data-role="content">
+			<div id="div-stop-list"></div>
+		</div>
+		<!-- /content -->
+	</div>
+	<!-- /page -->
+	<div data-role="page" id="div-page-main-map">
+		<!-- /panel -->
+		<div data-role="panel" id="mypanel">
+			<a href="#div-page-main-list" data-role="button">Go To List View</a>
+			<p>Reminders</p>
+			<a href="#mypanel" data-rel="close" data-role="button">Close</a>
+		</div>
+		<!-- /panel -->
+		<!-- /header -->
+		<div data-role="header">
+			<a href="#mypanel" data-icon="arrow-l">Views</a>
+			<h1>Rav's London Bus</h1>
+		</div>
+		<!-- /header -->
+		<!-- /content -->
+		<div data-role="content">
+			<p>
+			<div id="map-canvas"
+				style="width: 98%; height: 300px; border: 7px solid #bbbbbb; border-radius: 10px; box-shadow: 5px 5px 3px #888888;">
+				Map displayed here</div>
+		</div>
+		</p>
+		<!-- /content -->
+	</div>
+	<!-- /page -->
+	<script type="text/javascript">
+		$(document).bind('pageinit', initializeApplication());
+	</script>
+	"
+</body>
+</html>

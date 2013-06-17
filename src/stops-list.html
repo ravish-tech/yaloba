@@ -1,0 +1,11 @@
+<div id="div-stop-list">
+	{% for stop in stops %}
+	<ul data-role="listview" data-divider-theme="b" data-inset="true"
+		class="ul-stop-list">
+		<li data-role="list-divider">{{ stop[0] }} [{{stop[1] }}]</li> {% for
+		bus in stop[3] %}
+		<li><a href="#page1">{{ bus[0] }} to {{ bus[1] }} in {{
+				bus[2] }} mins. </a></li> {% endfor %}
+	</ul>
+	{% endfor %}
+</div>
